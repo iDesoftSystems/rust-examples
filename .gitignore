@@ -3,10 +3,4 @@
 .idea
 .vscode
 
-.docker
-
 *.DS_Store
-
-# Virtual environments
-.venv
-.env

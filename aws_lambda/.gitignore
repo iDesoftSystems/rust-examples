@@ -1,0 +1,7 @@
+/target
+.docker
+*.DS_Store
+
+
+
+.env
