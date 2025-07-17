@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:9000
+@contentType = application/json
+
+### create customer
+POST {{baseUrl}}/api/customers
+Content-Type: {{contentType}}
+
+{
+    "name": "Idesoft",
+    "businessName": "iDesoft Systems S.A.C.",
+    "fiscalNumber": "89767895678",
+    "isNaturalPerson": false
+}
