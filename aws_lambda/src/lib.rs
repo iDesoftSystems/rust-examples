@@ -1,7 +1,6 @@
 pub mod commands;
-pub mod err;
 pub mod handlers;
 pub mod om;
-pub mod responses;
+pub mod queries;
 pub mod schemas;
 pub mod state;

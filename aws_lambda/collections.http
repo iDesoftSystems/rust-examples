@@ -11,3 +11,7 @@ Content-Type: {{contentType}}
     "fiscalNumber": "89767895678",
     "isNaturalPerson": false
 }
+
+### read customers
+GET {{baseUrl}}/api/customers?page_size=10&page=0
+Content-Type: {{contentType}}

@@ -1,10 +1,16 @@
-use axum::{Json, extract::State};
+use axum::{
+    Json,
+    extract::{Query, State},
+};
+use eon::{
+    api::response::{ApiError, Created},
+    types::pagination::{Paged, Pagination},
+};
 
 use crate::{
     commands::{CommandHandler, create::CreateCustomerCommand},
-    err::ApiError,
-    om::CreateCustomerParams,
-    responses::Created,
+    om::{CreateCustomerParams, CustomerPage},
+    queries,
     state::AppContext,
 };
 
@@ -22,4 +28,13 @@ pub async fn create_customer(
     .await?;
 
     Ok(Created::new(saved_id))
+}
+
+pub async fn read_customers(
+    State(ctx): State<AppContext>,
+    Query(pagination): Query<Pagination>,
+) -> Result<Json<Paged<CustomerPage>>, ApiError> {
+    let paginated = queries::find_all_customers_paginated(&ctx.conn, &pagination).await?;
+
+    Ok(Json(paginated))
 }

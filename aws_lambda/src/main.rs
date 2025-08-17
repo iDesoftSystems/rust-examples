@@ -18,7 +18,8 @@ async fn main() -> Result<(), Error> {
     let router = Router::new()
         .route(
             "/api/customers",
-            routing::post(aws_lambda::handlers::create_customer),
+            routing::post(aws_lambda::handlers::create_customer)
+                .get(routing::get(aws_lambda::handlers::read_customers)),
         )
         .with_state(ctx);
 

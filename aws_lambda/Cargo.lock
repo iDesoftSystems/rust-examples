@@ -334,6 +334,7 @@ name = "aws_lambda"
 version = "0.1.0"
 dependencies = [
  "axum",
+ "eon",
  "lambda_http",
  "sea-orm",
  "serde",
@@ -829,6 +830,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "75030f3c4f45dafd7586dd6780965a8c7e8e285a5ecb86713e63a79c5b2766f3"
 dependencies = [
  "cfg-if",
+]
+
+[[package]]
+name = "eon"
+version = "0.1.1"
+source = "git+https://github.com/iDesoftSystems/eon.git#7dcf6730abdca409a20fb74bcec92bafd4ef63cc"
+dependencies = [
+ "axum",
+ "sea-orm",
+ "serde",
+ "thiserror",
+ "tracing",
+ "validator",
 ]
 
 [[package]]
@@ -1644,6 +1658,7 @@ version = "0.30.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2e99fb7a497b1e3339bc746195567ed8d3e24945ecd636e3619d20b9de9e9149"
 dependencies = [
+ "cc",
  "pkg-config",
  "vcpkg",
 ]
