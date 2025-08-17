@@ -9,7 +9,7 @@ use eon::{
 
 use crate::{
     commands::{CommandHandler, create::CreateCustomerCommand},
-    om::{CreateCustomerParams, CustomerPage},
+    http::om::{CreateCustomerParams, CustomerPage},
     queries,
     state::AppContext,
 };
