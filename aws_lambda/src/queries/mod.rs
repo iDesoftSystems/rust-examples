@@ -5,7 +5,7 @@ use eon::{
 };
 use sea_orm::{ConnectionTrait, EntityTrait, QueryOrder};
 
-use crate::{om::CustomerPage, schemas};
+use crate::{http::om::CustomerPage, schemas};
 
 pub async fn find_all_customers_paginated(
     client: &impl ConnectionTrait,

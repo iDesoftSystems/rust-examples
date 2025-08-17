@@ -1,6 +1,6 @@
 use std::env;
 
-use aws_lambda::state::AppContext;
+use aws_lambda::{http, state::AppContext};
 use axum::{Router, routing};
 use lambda_http::{Error, run, tracing};
 use sea_orm::Database;
@@ -18,8 +18,8 @@ async fn main() -> Result<(), Error> {
     let router = Router::new()
         .route(
             "/api/customers",
-            routing::post(aws_lambda::handlers::create_customer)
-                .get(routing::get(aws_lambda::handlers::read_customers)),
+            routing::post(http::handlers::create_customer)
+                .get(routing::get(http::handlers::read_customers)),
         )
         .with_state(ctx);
 
