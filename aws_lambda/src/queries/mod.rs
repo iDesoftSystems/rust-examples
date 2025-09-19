@@ -1,7 +1,6 @@
 use eon::{
-    api::response::ApiError,
-    orm::Paginate,
-    types::pagination::{Paged, Pagination},
+    http::ApiError,
+    pagination::{Paged, Paginate, Pagination},
 };
 use sea_orm::{ConnectionTrait, EntityTrait, QueryOrder};
 

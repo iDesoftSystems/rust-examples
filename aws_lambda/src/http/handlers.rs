@@ -3,8 +3,8 @@ use axum::{
     extract::{Query, State},
 };
 use eon::{
-    api::response::{ApiError, Created},
-    types::pagination::{Paged, Pagination},
+    http::{ApiError, Created},
+    pagination::{Paged, Pagination},
 };
 
 use crate::{
