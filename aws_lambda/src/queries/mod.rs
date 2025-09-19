@@ -15,3 +15,14 @@ pub async fn find_all_customers_paginated(
 
     Ok(paged)
 }
+
+pub async fn find_customer_by_id(
+    client: &impl ConnectionTrait,
+    customer_id: i32,
+) -> Result<Option<schemas::customer::Model>, DbErr> {
+    let customer_opt = schemas::customer::Entity::find_by_id(customer_id)
+        .one(client)
+        .await?;
+
+    Ok(customer_opt)
+}

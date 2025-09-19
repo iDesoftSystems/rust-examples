@@ -15,3 +15,14 @@ Content-Type: {{contentType}}
 ### read customers
 GET {{baseUrl}}/api/customers?page_size=10&page=0
 Content-Type: {{contentType}}
+
+### update customers
+PUT {{baseUrl}}/api/customers/1
+Content-Type: {{contentType}}
+
+{
+    "name": "Idesoft",
+    "businessName": "iDesoft Systems S.A.C.",
+    "fiscalNumber": "89767895679",
+    "isNaturalPerson": false
+}
