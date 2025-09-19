@@ -20,3 +20,12 @@ pub struct CustomerPage {
     pub is_natural_person: bool,
     pub created_at: DateTime,
 }
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct UpdateCustomerParams {
+    pub name: String,
+    pub business_name: String,
+    pub fiscal_number: String,
+    pub is_natural_person: bool,
+}

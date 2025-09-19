@@ -21,6 +21,10 @@ async fn main() -> Result<(), Error> {
             routing::post(http::handlers::create_customer)
                 .get(routing::get(http::handlers::read_customers)),
         )
+        .route(
+            "/api/customers/{customer_id}",
+            routing::put(http::handlers::update_customer),
+        )
         .with_state(ctx);
 
     run(router).await
