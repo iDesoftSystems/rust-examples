@@ -3,12 +3,13 @@ use axum::{
     extract::{Query, State},
 };
 use eon::{
+    command::ExecutableCommand,
     http::{ApiError, Created},
     pagination::{Paged, Pagination},
 };
 
 use crate::{
-    commands::{CommandHandler, create::CreateCustomerCommand},
+    commands::CreateCustomerCommand,
     http::om::{CreateCustomerParams, CustomerPage},
     queries,
     state::AppContext,
@@ -24,7 +25,7 @@ pub async fn create_customer(
         fiscal_number: payload.fiscal_number,
         is_natural_person: payload.is_natural_person,
     }
-    .handle(&ctx)
+    .execute(&ctx.conn)
     .await?;
 
     Ok(Created::new(saved_id))
