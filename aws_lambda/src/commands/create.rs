@@ -1,6 +1,8 @@
-use crate::{commands::CommandHandler, schemas, state::AppContext};
-use eon::http::ApiError;
-use sea_orm::{ActiveModelTrait, ActiveValue, sqlx::types::chrono::Utc};
+use crate::schemas;
+use eon::{command::ExecutableCommand, http::ApiError};
+use sea_orm::{
+    ActiveModelTrait, ActiveValue, DatabaseConnection, TryIntoModel, sqlx::types::chrono::Utc,
+};
 use validator::Validate;
 
 #[derive(Validate)]
@@ -16,11 +18,10 @@ pub struct CreateCustomerCommand {
     pub is_natural_person: bool,
 }
 
-impl CommandHandler for CreateCustomerCommand {
-    type Output = i32;
-    type Error = ApiError;
+impl ExecutableCommand<DatabaseConnection> for CreateCustomerCommand {
+    type Output = Result<i32, ApiError>;
 
-    async fn handle(self, ctx: &AppContext) -> Result<Self::Output, Self::Error> {
+    async fn execute(self, client: &DatabaseConnection) -> Self::Output {
         self.validate()?;
 
         let customer_am = schemas::customer::ActiveModel {
@@ -31,9 +32,10 @@ impl CommandHandler for CreateCustomerCommand {
             is_natural_person: ActiveValue::Set(self.is_natural_person.into()),
             created_at: ActiveValue::Set(Utc::now().naive_utc()),
         }
-        .save(&ctx.conn)
-        .await?;
+        .save(client)
+        .await?
+        .try_into_model()?;
 
-        Ok(customer_am.id.unwrap())
+        Ok(customer_am.id)
     }
 }
