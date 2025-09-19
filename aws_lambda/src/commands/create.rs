@@ -1,5 +1,5 @@
 use crate::{commands::CommandHandler, schemas, state::AppContext};
-use eon::api::response::ApiError;
+use eon::http::ApiError;
 use sea_orm::{ActiveModelTrait, ActiveValue, sqlx::types::chrono::Utc};
 use validator::Validate;
 
